@@ -45,16 +45,17 @@ app.config(function($stateProvider, $urlRouterProvider, $cssProvider) {
         })
 
         .state('curso.fluxograma', {
-            url: '/{mode:(?:requisitos|minha-grade|taxa-aprovacao)}',
+            url: '/{mode:(?:requisitos)}',
+            // url: '/{mode:(?:requisitos|minha-grade|taxa-aprovacao)}',
             css: 'app/views/curso.css',
             template: '<fluxograma>'
         })
 
-        .state('curso.correlacao', {
-            url: '/{mode:(?:correlacao)}',
-            css: 'app/views/curso.css',
-            template: '<div><ng-include src="\'app/correlacao/manual.html\'"></ng-include> <correlacao></correlacao></div>'
-        })
+        // .state('curso.correlacao', {
+        //     url: '/{mode:(?:correlacao)}',
+        //     css: 'app/views/curso.css',
+        //     template: '<div><ng-include src="\'app/correlacao/manual.html\'"></ng-include> <correlacao></correlacao></div>'
+        // })
 
         .state('curso.raio-x', {
             url: '/{mode:(?:raio-x)}',

@@ -41,8 +41,11 @@ app.controller('curso', function($scope, $state, $timeout, $location, $cookies, 
 
         if(mode == 'requisitos' || mode == 'minha-grade')
             var promise = modProvider.switch(mode)
-
-        if(mode == 'correlacao' || mode == 'raio-x')
+        //old
+        // if(mode == 'correlacao' || mode == 'raio-x')
+        //     var promise = $q.resolve()
+        //new
+        if(mode == 'raio-x')
             var promise = $q.resolve()
 
         $scope.show_menu = false
@@ -68,7 +71,7 @@ app.controller('curso', function($scope, $state, $timeout, $location, $cookies, 
         new MenuItem('Fluxograma', 'requisitos', 'disciplinas'),
         new MenuItem('Minha Grade', 'minha-grade', 'disciplinas'),
         new MenuItem('Taxa de Aprovação', 'taxa-aprovacao', 'aprovados periodos'),
-        new MenuItem('Correlação', 'correlacao', 'correlacao'),
+        // new MenuItem('Correlação', 'correlacao', 'correlacao'),
         new MenuItem('Raio-X', 'raio-x', 'formandos')
     ]
 
@@ -91,4 +94,4 @@ app.controller('curso', function($scope, $state, $timeout, $location, $cookies, 
             }())
         })
     }
-})
+}) 

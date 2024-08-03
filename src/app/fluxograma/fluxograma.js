@@ -22,6 +22,12 @@ app.directive('fluxograma', function($timeout, page, database, modProvider) {
                     if(obj.semestre == null) return
                     if(obj.semestre > last + 1) scope.table[last = obj.semestre - 1] = []
                     modProvider.disciplinas.push(obj.codigo_disciplina)
+                    console.log(scope.table);
+                    console.log(last);
+                    console.log(scope.table[last])
+                    // added this line to fix 
+                    if (scope.table[last] == undefined)
+                        scope.table[last] = [];
                     scope.table[last].push(obj)
                 })
             })

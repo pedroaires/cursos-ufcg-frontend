@@ -9,6 +9,7 @@ app.service('modProvider', function($location, $q, $timeout, database, page, req
     }
 
     this.switch = function (id) {
+
         var leave = self.current.leave
         var promise = leave? leave() : $q.resolve()
 

@@ -15,14 +15,16 @@ app.service('database', function($q, $location, request) {
     register('disciplinas', '/disciplinas')
     register('periodos', '/taxa-sucesso/periodos')
     register('aprovados', '/taxa-sucesso')
-    register('correlacao', '/correlacao', true)
+    // register('correlacao', '/correlacao', true)
     register('formandos', '/formandos', true)
 
     this.load = function(schema) {
         self.schema = schema
+        //non available resources
+        var non_available = ['periodos', 'aprovados', 'correlacao', 'formandos']
         resources.forEach(function(val, key) {
             self[key] = undefined
-
+        
             val.promise = request(schema + val.url).then(
                 function(data) {
                     return self[key] = data
