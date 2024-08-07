@@ -19,12 +19,10 @@ app.directive('fluxograma', function($timeout, page, database, modProvider) {
                 })
 
                 database.disciplinas.forEach(function(obj) {
-                    if(obj.semestre == null) return
+                    // new
+                    if(obj.semestre == -1) return
                     if(obj.semestre > last + 1) scope.table[last = obj.semestre - 1] = []
                     modProvider.disciplinas.push(obj.codigo_disciplina)
-                    console.log(scope.table);
-                    console.log(last);
-                    console.log(scope.table[last])
                     // added this line to fix 
                     if (scope.table[last] == undefined)
                         scope.table[last] = [];

@@ -72,26 +72,29 @@ app.service('modProvider', function($location, $q, $timeout, database, page, req
 
                 if(escolhas.length == 0) return
 
-                var url = database.schema + '/analise?' + $.param({
-                    escolhas: JSON.stringify(escolhas),
-                    historico: JSON.stringify(historico)
-                })
-
-                var direita = request(url).then(function(data) {
+                var direita = request(
+                    database.schema + '/analise',
+                    {
+                        "escolhas": escolhas,
+                        "historico": historico
+                    }
+                ).then(function(data) {
                     _self.dificuldade = data.risco_reprovacao
                     _self.popularidade = data.frequencia_matricula
                     _self.probabilidade = Math.round(data.probabilidade_matricula * 100) + '%'
                     _self.completude = Math.round(data.taxa_complecao * 100) + '%'
                 })
 
-                var urlRecomendacao = database.schema + '/recomendacao?' + $.param({
-                        disciplinas: JSON.stringify(escolhas),
-                        historico: JSON.stringify(historico),
-                        nao_cursei: JSON.stringify(nao_cursei)
-                })
-
-                if (urlRecomendacao.includes("ciencia_da_computacao_d_cg") || urlRecomendacao.includes("engenharia_eletrica_cg")){
-                    var esquerda = request(urlRecomendacao).then(function(data) {
+                
+                if (database.schema == "ciencia_da_computacao_d_cg" || database.schema == "engenharia_eletrica_cg"){
+                    var esquerda = request(
+                        database.schema + '/recomendacao',
+                        {
+                            "escolhas": escolhas,
+                            "historico": historico,
+                            "nao_cursei": nao_cursei
+                        }
+                    ).then(function(data) {
                         _self.recomendacoes = []
 
                         data.forEach(function (disciplina) {
@@ -124,6 +127,10 @@ app.service('modProvider', function($location, $q, $timeout, database, page, req
                         _self.showRecomendacao = false
                     })
                 }
+                // $q.all([direita]).then(function() {
+                //     _self.visible = true
+                //     _self.showRecomendacao = false
+                // })
             }
 
             this.getImage = function() {

@@ -20,8 +20,6 @@ app.service('database', function($q, $location, request) {
 
     this.load = function(schema) {
         self.schema = schema
-        //non available resources
-        var non_available = ['periodos', 'aprovados', 'correlacao', 'formandos']
         resources.forEach(function(val, key) {
             self[key] = undefined
         
