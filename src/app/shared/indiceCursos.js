@@ -9,7 +9,7 @@ var cores = [
 app.service('cursos', function(request, stringUtils) {
     var self = this
 
-    var promise = request('cursos_2015').then(function(data) {
+    var promise = request('cursos').then(function(data) {
         self.all = []
         data.forEach(function(curso) {
             if (curso.schema != "engenharia_de_alimentos_d_cg" &
