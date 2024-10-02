@@ -1,10 +1,9 @@
 
 app.factory('request', function($http) {
-
+    const backendUrl = 'http://150.165.85.100:5000/';
     return function(resource, data={}) {
         return $http({
-            // url: 'http://analytics.ufcg.edu.br/pre/' + resource,
-            url: 'http://localhost:5000/' + resource,
+            url: backendUrl + resource,
             method: 'GET',
             data: data,
             headers: {
