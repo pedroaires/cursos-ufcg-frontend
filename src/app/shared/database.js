@@ -12,18 +12,18 @@ app.service('database', function($q, $location, request) {
     }
 
     register('curso', '')
-    register('disciplinas', '/disciplinas')
-    register('periodos', '/taxa-sucesso/periodos')
-    register('aprovados', '/taxa-sucesso')
-    // register('correlacao', '/correlacao', true)
-    register('formandos', '/formandos', true)
+    register('disciplinas', 'disciplinas')
+    register('periodos', 'taxa-sucesso/periodos')
+    register('aprovados', 'taxa-sucesso')
+    // register('correlacao', 'correlacao', true)
+    register('formandos', 'formandos', true)
 
     this.load = function(schema) {
         self.schema = schema
         resources.forEach(function(val, key) {
             self[key] = undefined
         
-            val.promise = request(schema + val.url).then(
+            val.promise = request(`cursos/${schema}/${val.url}`).then(
                 function(data) {
                     return self[key] = data
                 },

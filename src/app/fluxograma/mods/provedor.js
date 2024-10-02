@@ -1,4 +1,4 @@
-
+const FEATURE_FLAG_RECOMMENDATION=false
 app.service('modProvider', function($location, $q, $timeout, database, page, request, facebook) {
     var self = this
     var modules = {}
@@ -86,7 +86,7 @@ app.service('modProvider', function($location, $q, $timeout, database, page, req
                 })
 
                 
-                if (database.schema == "ciencia_da_computacao_d_cg" || database.schema == "engenharia_eletrica_cg"){
+                if (FEATURE_FLAG_RECOMMENDATION && (database.schema == "ciencia_da_computacao_d_cg" || database.schema == "engenharia_eletrica_cg")){
                     var esquerda = request(
                         database.schema + '/recomendacao',
                         {
@@ -127,10 +127,6 @@ app.service('modProvider', function($location, $q, $timeout, database, page, req
                         _self.showRecomendacao = false
                     })
                 }
-                // $q.all([direita]).then(function() {
-                //     _self.visible = true
-                //     _self.showRecomendacao = false
-                // })
             }
 
             this.getImage = function() {
