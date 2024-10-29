@@ -1,12 +1,10 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14-alpine
+FROM httpd:2.4
 
-WORKDIR /app
+COPY . /usr/local/apache2/htdocs/
 
-COPY . /app
+RUN echo "Options -Indexes" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "<IfModule mod_headers.c>\n Header set Cache-Control \"max-age=31536000, public\"\n</IfModule>" >> /usr/local/apache2/conf/httpd.conf
 
-RUN npm install -g lite-server
+EXPOSE 80
 
-EXPOSE 3000
-
-CMD ["lite-server", "--baseDir=.", "--files=app/**/*.{html,htm,css,js}", "--host=0.0.0.0"]
+CMD ["httpd-foreground"]
