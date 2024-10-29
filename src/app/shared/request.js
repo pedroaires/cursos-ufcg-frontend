@@ -1,6 +1,7 @@
 
 app.factory('request', function($http) {
-    const backendUrl = 'http://150.165.85.100:5000/';
+    const backendUrl = "BACKEND_URL"; // Placeholder to be replaced by the entrypoint script
+    console.log("Using Backend: ", backendUrl)
     return function(resource, data={}) {
         return $http({
             url: backendUrl + resource,
