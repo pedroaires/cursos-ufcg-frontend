@@ -1,12 +1,15 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14-alpine
+FROM httpd:2.4
 
-WORKDIR /app
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-COPY . /app
+COPY . /usr/local/apache2/htdocs/
 
-RUN npm install -g lite-server
+# Disable directory listing for security and add basic caching headers
+RUN echo "Options -Indexes" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "<IfModule mod_headers.c>\n Header set Cache-Control \"max-age=31536000, public\"\n</IfModule>" >> /usr/local/apache2/conf/httpd.conf
 
-EXPOSE 3000
+EXPOSE 80
 
-CMD ["lite-server", "--baseDir=.", "--files=app/**/*.{html,htm,css,js}", "--host=0.0.0.0"]
+# Set the entrypoint to the custom script
+ENTRYPOINT ["/entrypoint.sh"]
